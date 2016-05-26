@@ -45,7 +45,7 @@ public class ControladorPuzleDeDados implements ActionListener {
         this.vistaPuzleDeDados.quitarDelPuzle.addActionListener(this);
         //Criatura nivel 1
         String caras[] = {"mov","inv","atk","atk","mov","inv"};
-        dado1.setDado(caras);
+        dado1.setCaras(caras);
         criatura1.setNombre("Goblin");
         criatura1.setDefensa(110);
         criatura1.setNivel(1);
@@ -54,7 +54,7 @@ public class ControladorPuzleDeDados implements ActionListener {
         criatura1.setDado(dado1);
         //Criatura nivel 2
         String caras2[] = {"tramp","inv","atk","atk","inv","tramp"};
-        dado2.setDado(caras2);
+        dado2.setCaras(caras2);
         criatura2.setNombre("Orco");
         criatura2.setAtaque(250);
         criatura2.setDefensa(340);

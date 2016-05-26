@@ -39,6 +39,7 @@ public class VistaInicio extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("YU GI OH! - DADOS DE CALABOZO");
 

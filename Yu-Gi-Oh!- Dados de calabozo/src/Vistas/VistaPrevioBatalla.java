@@ -49,6 +49,7 @@ public class VistaPrevioBatalla extends javax.swing.JFrame {
         jRadioButton6.setText("jRadioButton6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         escogerDados.setText("Escoger Dados");
 

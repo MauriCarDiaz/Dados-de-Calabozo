@@ -1,17 +1,48 @@
 
 package Modelo;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
-
-
-public class Tablero {
+public class Tablero extends JPanel{
     
     Combate combate;
     JefeDeTerreno jefe;
     Criatura criatura;
     private int[][] tableroTerreno = new int[15][15];
     private ArrayList<ArrayList<Criatura>> tableroCriatura = new ArrayList<ArrayList<Criatura>>();
+    
+    public Tablero() {
+        this.setBackground(Color.white);
+    }
+    @Override
+    public void paint(Graphics g){
+        
+        super.paint(g);
+        
+        g.setColor(Color.BLACK);
+        for(int i = 12; i <= 399; i = i + 25){
+            
+            g.drawLine(i, 12, i, 387);
+            g.drawLine(12, i, 387, i);
+            
+        }
+    }
+    
+    public void generarTablero(Graphics g, int tab[][], int x, int y){
+        super.paint(g);
+        g.setColor(Color.BLACK);
+        for(int i = 0; i<15; i++){
+            for(int j = 0;j<15;j++){
+                g.drawLine(i, 12, i, 387);
+                g.drawLine(12, i, 387, i);
+                g.fillRect(x+i*30, y+j*30, 30, 30);
+            }
+        }
+    }
+    
 
     public Combate getCombate() {
         return combate;
@@ -86,6 +117,4 @@ public class Tablero {
             tableroCriatura.get(antiguaPosX).set(antiguaPosY, null);
         }
     }
-    
-    
 }

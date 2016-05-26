@@ -2,7 +2,8 @@
 package Modelo;
 
 import Modelo.*;
-import java.util.ArrayList;
+import java.awt.List;
+import java.util.AbstractList;
 
 public class Criatura {
     
@@ -141,5 +142,15 @@ public class Criatura {
     
     public void invocarCriatura(){
         
+    }
+    
+   
+    public int[] estadisticasCriatura(Criatura criatura){
+        int[] estadisticas = new int[4];
+        estadisticas[0] = criatura.getAtaque();
+        estadisticas[1] = criatura.getDefensa();
+        estadisticas[2] = criatura.getPuntosDeVida();
+        estadisticas[3] = criatura.getNivel();  
+        return estadisticas;
     }
 }

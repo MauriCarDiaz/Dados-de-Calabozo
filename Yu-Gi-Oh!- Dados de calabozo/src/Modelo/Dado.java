@@ -1,6 +1,8 @@
 
 package Modelo;
 
+import java.util.Random;
+
 
 public class Dado {
     
@@ -16,11 +18,11 @@ public class Dado {
         this.nombre = nombre;
     }
 
-    public String[] getDado() {
+    public String[] getCaras() {
         return caras;
     }
 
-    public void setDado(String[] dado) {
+    public void setCaras(String[] dado) {
         this.caras = dado;
     }
 
@@ -31,4 +33,11 @@ public class Dado {
     public void setCriatura(Criatura criatura) {
         this.criatura = criatura;
     }   
+    
+    public String lanzarDado(String[] dado){
+        Random  rnd = new Random();
+        int numero = rnd.nextInt(6);
+        String cara = dado[numero];
+        return cara;
+    }
 }

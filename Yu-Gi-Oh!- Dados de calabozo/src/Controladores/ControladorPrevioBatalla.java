@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vistas.*;
 import Modelo.*;
+import static javafx.beans.binding.Bindings.or;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 
 public class ControladorPrevioBatalla implements ActionListener {
@@ -47,47 +49,78 @@ public class ControladorPrevioBatalla implements ActionListener {
         this.previoBatalla.individual.setActionCommand("individual");
         this.previoBatalla.equipos.setActionCommand("equipos");
         //
+        this.previoBatalla.individual.setEnabled(false);
+        this.previoBatalla.equipos.setEnabled(false); 
+        //
         //this.previoBatalla.cantidadCpu.setEnabled(false);
-        //this.previoBatalla.cantidadUsuarios.setEnabled(false); 
+        //this.previoBatalla.cantidadUsuarios.setEnabled(false);
     }
-    
-    public void configurarCombate(int competidores, String[] jugadores){
-        if (competidores == 2){
-            
-        }
-        if (competidores == 3){
-            
-        }
-        if (competidores == 4){
-        }
-    }
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
-       Object boton = e.getSource();
-        if (boton == this.previoBatalla.GenerarBatalla){
-            String botonGrupo1 = grupoCompetidores.getSelection().getActionCommand();
-            //String botonGrupo2 = grupoModalidad.getSelection().getActionCommand();
-            //int cantidadUsuario = (int) this.previoBatalla.cantidadUsuarios.getSelectedItem();
-            //int cantidadCpu = (int) this.previoBatalla.cantidadCpu.getSelectedItem();
-            if ("solo usuarios".equals(botonGrupo1)){
+        Object boton = e.getSource();
+        String botonGrupo1 = grupoCompetidores.getSelection().getActionCommand();
+        int cantCompetidor = 0;
+        int cantCpu = 0;
+        if (null != botonGrupo1)switch (botonGrupo1) {
+            case "solo usuarios":
                 this.previoBatalla.cantidadUsuarios.setEnabled(true);
-                VistaBatalla vistaBatalla = new VistaBatalla();
-                ControladorBatalla ctrlBatalla = new ControladorBatalla(vistaBatalla);
-                ctrlBatalla.iniciar_VistaBatalla(2);
-                vistaBatalla.setVisible(true);
-                previoBatalla.setVisible(false);
-               
+                this.previoBatalla.cantidadCpu.setEnabled(false);
+                cantCompetidor = this.previoBatalla.cantidadUsuarios.getItemCount();
+                break;
+            case "solo cpu":
+                this.previoBatalla.cantidadCpu.setEnabled(true);
+                this.previoBatalla.cantidadUsuarios.setEnabled(false);
+                cantCpu = this.previoBatalla.cantidadCpu.getItemCount();
+                break;
+            case "usuarios cpu":
+                this.previoBatalla.soloUsuarios.setEnabled(true);
+                this.previoBatalla.soloCpu.setEnabled(true);
+                cantCompetidor = this.previoBatalla.cantidadUsuarios.getItemCount();
+                cantCpu = this.previoBatalla.cantidadCpu.getItemCount();
+                if ((cantCompetidor + cantCpu) > 4){
+                    JOptionPane.showMessageDialog(null, "Debe escoger entre 2 y 4 jugadores");
+                }
+         
+                break;
+            default:
+                break;
+        }
+        
+        if (boton == this.previoBatalla.GenerarBatalla){
+            
+            VistaBatalla vistaBatalla = new VistaBatalla();
+            ControladorBatalla ctrlBatalla = new ControladorBatalla(vistaBatalla);
+            ctrlBatalla.iniciar_VistaBatalla();
+            vistaBatalla.setVisible(true);
+            previoBatalla.setVisible(false); 
+        }
+            /*if ("solo usuarios".equals(botonGrupo1)){
+                this.previoBatalla.cantidadUsuarios.setEnabled(true);
+                cantCompetidor = this.previoBatalla.cantidadUsuarios.getItemCount();
+                if (cantCompetidor == 2 || cantCompetidor == 3 || cantCompetidor == 4){
+                    VistaBatalla vistaBatalla = new VistaBatalla();
+                    ControladorBatalla ctrlBatalla = new ControladorBatalla(vistaBatalla);
+                    ctrlBatalla.iniciar_VistaBatalla();
+                    vistaBatalla.setVisible(true);
+                    previoBatalla.setVisible(false);   
+                }   
             }
+            
             if ("solo cpu".equals(botonGrupo1)){
                 this.previoBatalla.cantidadCpu.setEnabled(true);
             }
+            
             if ("usuarios cpu".equals(botonGrupo1)){
-               this.previoBatalla.cantidadUsuarios.setEnabled(true);
-               
+                this.previoBatalla.cantidadUsuarios.setEnabled(true);
+                this.previoBatalla.cantidadCpu.setEnabled(true);
+                VistaBatalla vistaBatalla = new VistaBatalla();
+                ControladorBatalla ctrlBatalla = new ControladorBatalla(vistaBatalla);
+                ctrlBatalla.iniciar_VistaBatalla();
+                vistaBatalla.setVisible(true);
+                previoBatalla.setVisible(false);  
             }
-        }
+        }*/
         if (boton == this.previoBatalla.Volver){
             VistaMenuPrincipal menuPrincipal = new VistaMenuPrincipal();
             ControladorMenuPrincipal ctrlMenuPrincipal = new ControladorMenuPrincipal(menuPrincipal);
@@ -95,6 +128,5 @@ public class ControladorPrevioBatalla implements ActionListener {
             menuPrincipal.setVisible(true);
             previoBatalla.setVisible(false);
         }
-    }
-    
+}
 }

@@ -1,7 +1,7 @@
 
 package Modelo;
 
-
+import java.util.Random;
 
 public class Combate {
     
@@ -9,23 +9,22 @@ public class Combate {
     public int modo;
     private int turno;
     private Tablero tablero;
-    private Jugador jugador1;
-    private Jugador jugador2;
-    private Jugador jugador3;
-    private Jugador jugador4;
-    private Jugador jugadorActual;
-    private Jugador jugadorSiguente, jugadorSiguiente2, jugadorSiguiente3;
+    private String jugador1;
+    private String jugador2;
+    private String jugador3;
+    private String jugador4;
+    private String jugadorActual;
+    private String jugadorSiguente, jugadorSiguiente2, jugadorSiguiente3;
 
-    public Combate(int competidores, int modo, Tablero tablero, Jugador jugador1, Jugador jugador2, Jugador jugador3, Jugador jugador4) {
+    /*public Combate(int competidores, String jugador1, String jugador2, String jugador3, String jugador4) {
         this.competidores = competidores;
-        this.modo = modo;
         this.tablero = tablero;
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.jugador3 = jugador3;
         this.jugador4 = jugador4;
         
-    }
+    }*/
 
     public int getCompetidores() {
         return competidores;
@@ -51,76 +50,161 @@ public class Combate {
         this.tablero = tablero;
     }
 
-    public Jugador getJugador1() {
+    public String getJugador1() {
         return jugador1;
     }
 
-    public void setJugador1(Jugador jugador1) {
+    public void setJugador1(String jugador1) {
         this.jugador1 = jugador1;
     }
 
-    public Jugador getJugador2() {
+    public String getJugador2() {
         return jugador2;
     }
 
-    public void setJugador2(Jugador jugador2) {
+    public void setJugador2(String jugador2) {
         this.jugador2 = jugador2;
     }
 
-    public Jugador getJugador3() {
+    public String getJugador3() {
         return jugador3;
     }
 
-    public void setJugador3(Jugador jugador3) {
+    public void setJugador3(String jugador3) {
         this.jugador3 = jugador3;
     }
 
-    public Jugador getJugador4() {
+    public String getJugador4() {
         return jugador4;
     }
 
-    public void setJugador4(Jugador jugador4) {
+    public void setJugador4(String jugador4) {
         this.jugador4 = jugador4;
     }
 
-    public Jugador getJugadorActual() {
+    public String getJugadorActual() {
         return jugadorActual;
     }
 
-    public void setJugadorActual(Jugador jugadorActual) {
+    public void setJugadorActual(String jugadorActual) {
         this.jugadorActual = jugadorActual;
     }
 
-    public Jugador getJugadorSiguente() {
+    public String getJugadorSiguente() {
         return jugadorSiguente;
     }
 
-    public void setJugadorSiguente(Jugador jugadorSiguente) {
+    public void setJugadorSiguente(String jugadorSiguente) {
         this.jugadorSiguente = jugadorSiguente;
     }
 
-    public Jugador getJugadorSiguiente2() {
+    public String getJugadorSiguiente2() {
         return jugadorSiguiente2;
     }
 
-    public void setJugadorSiguiente2(Jugador jugadorSiguiente2) {
+    public void setJugadorSiguiente2(String jugadorSiguiente2) {
         this.jugadorSiguiente2 = jugadorSiguiente2;
     }
 
-    public Jugador getJugadorSiguiente3() {
+    public String getJugadorSiguiente3() {
         return jugadorSiguiente3;
     }
 
-    public void setJugadorSiguiente3(Jugador jugadorSiguiente3) {
+    public void setJugadorSiguiente3(String jugadorSiguiente3) {
         this.jugadorSiguiente3 = jugadorSiguiente3;
     }
     
-    public void configurarCombate(int participantes, int modo, String jugador1, String jugador2, String jugador3, String jugador4){
-        if (modo == 0){
+    /*public void configurarCombate(int participantes, String jugador1, String jugador2, String jugador3, String jugador4){
+        if (participantes == 2){
+            this.jugador1 = new Jugador();
+            this.jugador2 = new Jugador();
+            seleccionarTurno(participantes);
+            tablero.generarTablero();
+            tablero.ponerJefe(participantes);
             
+        }
+        if (participantes == 3){
+            this.jugador1 = new Jugador();
+            this.jugador2 = new Jugador();
+            this.jugador3 = new Jugador();
+            seleccionarTurno(participantes);
+            tablero.ponerJefe(participantes);
+        }
+        if (participantes == 4){
+            this.jugador1 = new Jugador();
+            this.jugador2 = new Jugador();
+            this.jugador3 = new Jugador();
+            this.jugador4 = new Jugador();
+            seleccionarTurno(participantes);
+            tablero.ponerJefe(participantes);
+        }
+    }*/
+    
+    public void cambiarTurno(){
+        if (this.jugadorActual == this.jugador1){
+            this.jugadorActual = jugador2;
+            this.jugadorSiguente = jugador1;
+        } else{
+            this.jugadorActual = jugador1;
+            this.jugadorSiguente = jugador2;
         }
     }
     
-    
-    
+    public void seleccionarTurno(int competidores, String jugador1, String jugador2, String jugador3, String jugador4){
+        Random  rnd = new Random();
+        if (competidores == 2){
+            int numero =  (int) (rnd.nextDouble()*2);
+            if (numero == 1){
+                this.jugadorActual = jugador1;
+                this.jugadorSiguente = jugador2;
+            } else{
+                this.jugadorActual = jugador2;
+                this.jugadorSiguente = jugador1;
+            }
+        }
+        if (competidores == 3){
+            int numero = (int) (rnd.nextDouble()*3);
+            if (numero == 1){
+                this.jugadorActual = jugador1;
+                this.jugadorSiguente = jugador2;
+                this.jugadorSiguiente2 = jugador3;
+            }
+            else if (numero == 2){
+                this.jugadorActual = jugador2;
+                this.jugadorSiguente = jugador3;
+                this.jugadorSiguiente2 = jugador1;
+            } else {
+                this.jugadorActual = jugador3;
+                this.jugadorSiguente = jugador1;
+                this.jugadorSiguiente2 = jugador2;
+            }
+        }
+        if (competidores == 4){
+            int numero = (int) (rnd.nextDouble()*4);
+            if (numero == 1){
+                this.jugadorActual = jugador1;
+                this.jugadorSiguente = jugador2;
+                this.jugadorSiguiente2 = jugador3;
+                this.jugadorSiguiente3 = jugador4;
+            }
+            else if (numero == 2){
+                this.jugadorActual = jugador2;
+                this.jugadorSiguente = jugador3;
+                this.jugadorSiguiente2 = jugador4;
+                this.jugadorSiguiente3 = jugador1;
+            }
+            else if (numero == 3){
+                this.jugadorActual = jugador3;
+                this.jugadorSiguente = jugador4;
+                this.jugadorSiguiente2 = jugador1;
+                this.jugadorSiguiente3 = jugador2;
+            } else {
+                this.jugadorActual = jugador4;
+                this.jugadorSiguente = jugador1;
+                this.jugadorSiguiente2 = jugador2;
+                this.jugadorSiguiente3 = jugador3;
+            }
+        }
+    }
+
 }
